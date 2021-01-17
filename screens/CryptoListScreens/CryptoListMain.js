@@ -1,27 +1,59 @@
 import React, {useEffect} from 'react';
 
-import {Text} from 'react-native';
 import {connect} from 'react-redux';
-import {WrapperWithLoader} from '../../components';
-import {fetchAllCryptoData} from '../../store/allCryptoReducer/actions';
+import {
+  WrapperWithLoader,
+  CryptoFlatlist,
+  OneCoinComponent,
+  CryptoOrderCategory,
+} from '../../components';
+import _ from 'lodash';
+import {
+  fetchAllCryptoData,
+  fetchNewCryptoData,
+} from '../../store/allCryptoReducer/actions';
 
-function CryptoListMain({fetchAllCryptoData, isLoading}) {
+function CryptoListMain({
+  fetchAllCryptoData,
+  fetchNewCryptoData,
+  isLoading,
+  data,
+  params,
+}) {
+  const start = () => {
+    fetchAllCryptoData();
+  };
+  const onEnd = () => {
+    fetchNewCryptoData();
+  };
   useEffect(() => {
-    fetchAllCryptoData('dawdaw');
-    console.log('FETCH');
-  }, []);
+    start();
+  }, [params]);
 
   return (
-    <WrapperWithLoader isLoading={true}>
-      <Text>dawdaw</Text>
+    <WrapperWithLoader isLoading={isLoading && _.isEmpty(data)}>
+      <CryptoOrderCategory />
+      <CryptoFlatlist
+        data={data}
+        onEndReachedFunc={() => {
+          console.log('end');
+          onEnd();
+        }}
+        renderComponent={OneCoinComponent}
+        start={start}
+        isLoading={isLoading}
+      />
     </WrapperWithLoader>
   );
 }
 const mapStateToProps = (state) => ({
   isLoading: state.allCryptoReducer.isLoading,
+  data: state.allCryptoReducer.allCryptoData,
+  params: state.allCryptoReducer.params,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchAllCryptoData: (params) => dispatch(fetchAllCryptoData(params)),
+  fetchAllCryptoData: () => dispatch(fetchAllCryptoData()),
+  fetchNewCryptoData: () => dispatch(fetchNewCryptoData()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(CryptoListMain);

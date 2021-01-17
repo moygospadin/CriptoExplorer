@@ -1,30 +1,23 @@
-import {put, takeEvery, call} from 'redux-saga/effects';
+import {put, takeEvery, call, select, takeLatest} from 'redux-saga/effects';
 import {FETCH_ALL_CRYPTO_DATA} from '../../store/allCryptoReducer/types';
 import {
   setAllCryptoData,
   loadStatusCryptoData,
+  changeParams,
 } from '../../store/allCryptoReducer/actions';
-const fetchAllCryptoFromApi = async ({params}) => {
-  console.log('params', params);
-  try {
-    const responce = await fetch(
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=0&sparkline=false',
-    );
-    if (!responce.ok) {
-      throw await responce.json();
-    }
-
-    const resData = await responce.json();
-    console.log('resData', resData);
-  } catch (error) {
-    console.log('err', err);
-  }
-};
-function* fetchAllCryptoWorker(props) {
+import _ from 'lodash';
+import {fetchCryptoFromApi} from '../../utils/fetchCryptoFromApi';
+function* fetchAllCryptoWorker() {
   yield put(loadStatusCryptoData(true));
-  const data = yield call(() => fetchAllCryptoFromApi(props));
+  const params = yield select((state) => state.allCryptoReducer.params);
+
+  params['page'] = 1;
+  yield put(changeParams(params));
+
+  const data = yield call(() => fetchCryptoFromApi(params));
 
   yield put(setAllCryptoData(data));
+
   yield put(loadStatusCryptoData(false));
 }
 
