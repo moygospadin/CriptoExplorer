@@ -31,13 +31,6 @@ function MyTabBar({state, descriptors, navigation}) {
           }
         };
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
         return (
           <TouchableOpacity
             key={index}
@@ -46,7 +39,6 @@ function MyTabBar({state, descriptors, navigation}) {
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
             style={[
               {flex: 1, alignItems: 'center', paddingVertical: 5},
               isFocused && {backgroundColor: '#B3B7B9'},

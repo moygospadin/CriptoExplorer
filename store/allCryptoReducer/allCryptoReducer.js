@@ -25,6 +25,7 @@ const defaultState = {
       },
     ],
   },
+  allCryptoCoins: [],
 };
 export default function allCryptoReducer(state = defaultState, action) {
   switch (action.type) {

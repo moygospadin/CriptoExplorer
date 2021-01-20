@@ -2,7 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import TransitionScreenOptions from './TransitionScreenOptions';
-import {RealtimeConverterMain} from '../screens';
+import {RealtimeConverterMain, CoinConvertScreen} from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -13,6 +13,7 @@ function RealtimeConverterNavigation() {
         name="RealtimeConverterMain"
         component={RealtimeConverterMain}
       />
+      <Stack.Screen name="CoinConvertScreen" component={CoinConvertScreen} />
     </Stack.Navigator>
   );
 }

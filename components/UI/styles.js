@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-
+import {StyleSheet, Dimensions} from 'react-native';
+const {width} = Dimensions.get('screen');
 export const OneCoinComponentStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
@@ -32,4 +32,64 @@ export const CryptoOrderCategoryStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+});
+
+export const OneCoinScreenStyles = StyleSheet.create({
+  container: {flex: 1, backgroundColor: '#fff', paddingTop: 30, padding: 20},
+  textBold: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#222325',
+    marginBottom: 10,
+  },
+  textGray: {
+    fontSize: 18,
+
+    color: '#4F4F4F',
+  },
+});
+
+export const TextInputUIStyles = StyleSheet.create({
+  textInput: {
+    width: width - 40,
+    height: 48,
+    alignSelf: 'center',
+
+    backgroundColor: '#F9F9F9',
+    borderRadius: 8,
+    paddingLeft: 20,
+  },
+});
+
+export const CoinConvertScreenStyles = StyleSheet.create({
+  container: {flex: 1, backgroundColor: '#fff', padding: 20},
+  textBold: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#222325',
+    marginBottom: 10,
+  },
+  textGray: {
+    fontSize: 18,
+
+    color: '#4F4F4F',
+  },
+  valueField: {
+    width: width - 40,
+    height: 48,
+    alignSelf: 'center',
+    backgroundColor: '#F9F9F9',
+    borderRadius: 8,
+    justifyContent: 'center',
+    paddingLeft: 30,
+  },
+  converterContainer: {
+    justifyContent: 'space-between',
+    height: 150,
+    alignItems: 'center',
+    marginTop: 30,
+  },
+});
+export const RealtimeConverterMainStyles = StyleSheet.create({
+  textInput: {},
 });

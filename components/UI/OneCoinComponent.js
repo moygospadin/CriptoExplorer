@@ -2,9 +2,11 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {OneCoinComponentStyles as styles} from './styles';
 
-function OneCoinComponent(props) {
+function OneCoinComponent(props, navigation) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('OneCoinScreen', {props})}>
       <Image style={{width: 24, height: 24}} source={{uri: props.image}} />
       <Text style={{maxWidth: '40%'}}>{props.name}</Text>
       <Text>{props.current_price} $</Text>
