@@ -11,16 +11,18 @@ import {fetchAllCryptoCoins} from '../../store/allCryptoCoins/actions';
 import {connect} from 'react-redux';
 
 function RealtimeConverterMain({fetchAllCryptoCoins, isLoading, data}) {
+  const [textInputValue, setTextInputValue] = useState('');
   const start = () => {
     fetchAllCryptoCoins();
   };
-  const [textInputValue, setTextInputValue] = useState('');
   useEffect(() => {
     start();
   }, []);
-  const filterData = useMemo(() => {
-    return data.filter((el) => el.name.includes(textInputValue));
-  }, [textInputValue]);
+  const filterData = useMemo(
+    () => data.filter((el) => el.name.includes(textInputValue)),
+    [textInputValue, data],
+  );
+
   return (
     <WrapperWithLoader isLoading={isLoading && _.isEmpty(data)}>
       <TextInputUI

@@ -35,7 +35,7 @@ export const CryptoOrderCategoryStyles = StyleSheet.create({
 });
 
 export const OneCoinScreenStyles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#fff', paddingTop: 30, padding: 20},
+  container: {flex: 1, backgroundColor: '#fff', paddingTop: 30},
   textBold: {
     fontWeight: 'bold',
     fontSize: 18,

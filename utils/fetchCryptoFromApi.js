@@ -10,7 +10,7 @@ export const fetchCryptoFromApi = async (params) => {
     }
 
     const resData = await responce.json();
-    console.log('resData', resData);
+
     return resData;
   } catch (error) {
     console.log('err', error);
